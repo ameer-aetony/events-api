@@ -26,5 +26,6 @@ Route::prefix('auth')->group(function(){
 
 Route::prefix('ticket')->middleware('auth:sanctum')->group(function(){
     Route::post('purchase', [TicketController::class,'purchase']);
+    Route::post('discount', [TicketController::class,'discount']);
 
 });
