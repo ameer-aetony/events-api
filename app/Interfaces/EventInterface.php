@@ -2,15 +2,18 @@
 
 namespace App\Interfaces;
 
+use App\Dto\EventDto;
+use App\Models\Event;
+use Illuminate\Foundation\Http\FormRequest;
 interface EventInterface {
 
- public function all($request);
+ public function all(FormRequest $request): \Illuminate\Pagination\LengthAwarePaginator;
 
- public function getById($id);
+ public function findEventOrFail(int $id):Event;
 
- public function create($request);
+ public function create(EventDto $eventDto):Event;
 
- public function update($request,$id);
+ public function update(EventDto $eventDto,int $id):bool;
 
- public function delete($id);
+ public function delete(int $id):bool;
 }

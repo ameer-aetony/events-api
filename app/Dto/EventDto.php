@@ -62,11 +62,9 @@ class EventDto
         return $this->ticket_count;
     }
 
-
-
     public function setStartDate(string $start_date)
     {
-         $this->start_date = $start_date;
+         $this->start_date = Carbon::parse($start_date);
          
     }
 
@@ -77,7 +75,7 @@ class EventDto
 
     public function setEndDate(string $end_date)
     {
-         $this->end_date = $end_date;
+         $this->end_date = Carbon::parse($end_date);
     }
 
     public function getEndDate()
@@ -106,5 +104,16 @@ class EventDto
         $eventDto->setStartDate($model->start_date);
         $eventDto->setEndDate($model->end_date);
         return $eventDto;
+    }
+
+    public function toArray()
+    {
+        return [
+            'name' => $this->name,
+            'description' => $this->description,
+            'ticket_count' => $this->ticket_count,
+            'start_date' => $this->start_date,
+            'end_date' => $this->end_date,
+        ];
     }
 }
