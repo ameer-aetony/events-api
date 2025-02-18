@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Dto\EventDto;
+use App\Exceptions\InsufficientTicketException;
 use App\Http\Resources\EventResource;
 use App\Interfaces\EventInterface;
 
@@ -39,5 +40,20 @@ class EventService
     public function delete($id)
     {
         return $this->eventInterface->delete($id);
+    }
+
+    public function checkTicketCountAvailable($id,$count):bool
+    {
+        $event = $this->eventInterface->findEventOrFail($id);
+        $event->lockForUpdate();
+        if($event->ticket_count < $count)
+        {
+            throw new InsufficientTicketException("Insufficient tickets available.");
+        }
+        $event->ticket_count -= $count;
+        $event->save();
+
+        $event->refresh();
+        return true;
     }
 }

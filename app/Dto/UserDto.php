@@ -94,8 +94,6 @@ class UserDto
         $userDto->setId($model->id);
         $userDto->setName($model->name);
         $userDto->setEmail($model->email);
-        $userDto->setCreatedAt($model->created_at);
-        $userDto->setUpdatedAt($model->updated_at);
         return $userDto;
     }
 }

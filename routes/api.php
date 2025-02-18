@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\EventController;
+use App\Http\Controllers\TicketController;
 use Illuminate\Support\Facades\Route;
 
 // event routes
@@ -21,4 +22,9 @@ Route::prefix('auth')->group(function(){
         Route::get('me', [AuthenticationController::class, 'user']);
         Route::get('logout', [AuthenticationController::class, 'logout']);
     });
+});
+
+Route::prefix('ticket')->middleware('auth:sanctum')->group(function(){
+    Route::post('purchase', [TicketController::class,'purchase']);
+
 });

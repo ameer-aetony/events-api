@@ -43,6 +43,10 @@ class Handler extends ExceptionHandler
                 return $this->sendError($exception->getMessage(),null,1, $statusCode);
             }
 
+            if ($exception instanceof InsufficientTicketException) {
+                $statusCode = Response::HTTP_BAD_REQUEST;
+                return $this->sendError($exception->getMessage(),null,1, $statusCode);
+            }
 
             if ($exception instanceof \Error) {
                 $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
