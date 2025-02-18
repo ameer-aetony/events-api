@@ -16,4 +16,9 @@ class Event extends Model
         'end_date',
         'ticket_count',
     ];
+
+    public function tickets()
+    {
+        return $this->hasMany(Ticket::class);
+    }
 }

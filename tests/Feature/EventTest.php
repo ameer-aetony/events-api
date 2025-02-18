@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Models\Event;
+use App\Services\EventService;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -11,6 +12,7 @@ class EventTest extends TestCase
 {
     use RefreshDatabase;
 
+  
     public function test_can_list_events(): void
     {
         $events = Event::factory()->count(3)->create();
