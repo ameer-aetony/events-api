@@ -6,8 +6,9 @@ use App\Exceptions\InvalidException;
 
 class DiscountService
 {
-    public function calculateDiscount(array $cart)
+    public function calculateDiscount($request)
     {
+        $cart = $request->cart();
         $this->validateCartItems($cart);
         $total = $this->calculateTotal($cart);
         $discount = $this->calculateDiscountAmount($total);
